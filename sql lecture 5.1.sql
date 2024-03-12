@@ -14,3 +14,10 @@ select * from student_data where id in (1,10,12);
 select * from student_data where name in ('subhash','ambuj');
 SET SQL_SAFE_UPDATES = 0;
 update student_data set paid_fees = paid_fees+(paid_fees*0.15)where id in (10,12);
+
+show databases;
+use virendra;
+select * from student_data;
+select * from student_data where id not in (11,14);
+
+delete from student_data where id in (10,12);
