@@ -1,0 +1,751 @@
+MariaDB [(none)]> create database sql25;
+Query OK, 1 row affected (0.020 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sql25              |
+| test               |
++--------------------+
+6 rows in set (0.035 sec)
+
+MariaDB [(none)]> use sql25;
+Database changed
+MariaDB [sql25]> drop database sql25;
+Query OK, 0 rows affected (0.111 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.041 sec)
+
+MariaDB [(none)]> create database sql25;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> use sql25;
+Database changed
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3),
+    -> name varchar(10),
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.096 sec)
+
+MariaDB [sql25]>
+MariaDB [sql25]> insert into student values(1,'harry',89.54,'1997-08-09');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [sql25]> insert into student values(1,'harry',89.54,'1997-08-09','java');
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [sql25]> select * from student;
++------+-------+-------+-------------+--------+
+| id   | name  | marks | dateofbirth | course |
++------+-------+-------+-------------+--------+
+|    1 | harry | 89.54 | 1997-08-09  | java   |
++------+-------+-------+-------------+--------+
+1 row in set (0.070 sec)
+
+MariaDB [sql25]> describe student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | YES  |     | NULL    |       |
+| name        | varchar(10)  | YES  |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.051 sec)
+
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | YES  |     | NULL    |       |
+| name        | varchar(10)  | YES  |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.016 sec)
+
+MariaDB [sql25]> show tables;
++-----------------+
+| Tables_in_sql25 |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.008 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.062 sec)
+
+MariaDB [sql25]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3),
+    -> name varchar(10),
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.070 sec)
+
+MariaDB [sql25]> show tables;
++-----------------+
+| Tables_in_sql25 |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.011 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',89.54,'1997-08-09','java');
+Query OK, 1 row affected (0.027 sec)
+
+MariaDB [sql25]> select * from student;
++------+-------+-------+-------------+--------+
+| id   | name  | marks | dateofbirth | course |
++------+-------+-------+-------------+--------+
+|    1 | harry | 89.54 | 1997-08-09  | java   |
++------+-------+-------+-------------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [sql25]> truncate table student;
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [sql25]> show tables;
++-----------------+
+| Tables_in_sql25 |
++-----------------+
+| student         |
++-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [sql25]> select * from student;
+Empty set (0.002 sec)
+
+MariaDB [sql25]> insert into student values(2,'ron','1999-08-04');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [sql25]> insert into student(id,name,dateofbirth) values(2,'ron','1999-08-04');
+Query OK, 1 row affected (0.051 sec)
+
+MariaDB [sql25]> select * from student;
++------+------+-------+-------------+--------+
+| id   | name | marks | dateofbirth | course |
++------+------+-------+-------------+--------+
+|    2 | ron  |  NULL | 1999-08-04  | NULL   |
++------+------+-------+-------------+--------+
+1 row in set (0.031 sec)
+
+MariaDB [sql25]> insert into student(id,dateofbirth,marks) values(1,'1997-07-14',78.45);
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [sql25]> select * from student;
++------+------+-------+-------------+--------+
+| id   | name | marks | dateofbirth | course |
++------+------+-------+-------------+--------+
+|    2 | ron  |  NULL | 1999-08-04  | NULL   |
+|    1 | NULL | 78.45 | 1997-07-14  | NULL   |
++------+------+-------+-------------+--------+
+2 rows in set (0.003 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.069 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) not null,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.054 sec)
+
+MariaDB [sql25]> insert into student(id,name,dateofbirth) values(2,'ron','1999-08-04');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [sql25]> select * from student;
++----+------+-------+-------------+--------+
+| id | name | marks | dateofbirth | course |
++----+------+-------+-------------+--------+
+|  2 | ron  |  NULL | 1999-08-04  | NULL   |
++----+------+-------+-------------+--------+
+1 row in set (0.020 sec)
+
+MariaDB [sql25]> insert into student(id,dateofbirth,marks) values(1,'1997-07-14',78.45);
+Query OK, 1 row affected, 1 warning (0.011 sec)
+
+MariaDB [sql25]> select * from student;
++----+------+-------+-------------+--------+
+| id | name | marks | dateofbirth | course |
++----+------+-------+-------------+--------+
+|  2 | ron  |  NULL | 1999-08-04  | NULL   |
+|  1 |      | 78.45 | 1997-07-14  | NULL   |
++----+------+-------+-------------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [sql25]> insert into student(id,namedateofbirth,marks) values(3,null,'1997-07-14',78.45);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [sql25]> insert into student(id,name,dateofbirth,marks) values(3,null,'1997-07-14',78.45);
+ERROR 1048 (23000): Column 'name' cannot be null
+MariaDB [sql25]> insert into student(name,dateofbirth,marks) values('harry','1997-07-14',78.45);
+Query OK, 1 row affected, 1 warning (0.027 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  2 | ron   |  NULL | 1999-08-04  | NULL   |
+|  1 |       | 78.45 | 1997-07-14  | NULL   |
+|  0 | harry | 78.45 | 1997-07-14  | NULL   |
++----+-------+-------+-------------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [sql25]>
+MariaDB [sql25]> insert into student(id,name,dateofbirth,marks) values(null,'harry','1997-07-14',78.45);
+ERROR 1048 (23000): Column 'id' cannot be null
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   |     | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.027 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) not null,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   |     | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.009 sec)
+
+MariaDB [sql25]> insert into student(id,name,dateofbirth) values(2,'ron','1999-08-04');
+Query OK, 1 row affected (0.014 sec)
+
+MariaDB [sql25]> select * from student;
++----+------+-------+-------------+--------+
+| id | name | marks | dateofbirth | course |
++----+------+-------+-------------+--------+
+|  2 | ron  |  NULL | 1999-08-04  | NULL   |
++----+------+-------+-------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [sql25]> insert into student(id,dateofbirth,marks) values(1,'1997-07-14',78.45);
+Query OK, 1 row affected, 1 warning (0.005 sec)
+
+MariaDB [sql25]> select * from student;
++----+------+-------+-------------+--------+
+| id | name | marks | dateofbirth | course |
++----+------+-------+-------------+--------+
+|  2 | ron  |  NULL | 1999-08-04  | NULL   |
+|  1 |      | 78.45 | 1997-07-14  | NULL   |
++----+------+-------+-------------+--------+
+2 rows in set (0.003 sec)
+
+MariaDB [sql25]> insert into student(id,name,dateofbirth) values(2,'','1999-08-04');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [sql25]> select * from student;
++----+------+-------+-------------+--------+
+| id | name | marks | dateofbirth | course |
++----+------+-------+-------------+--------+
+|  2 | ron  |  NULL | 1999-08-04  | NULL   |
+|  1 |      | 78.45 | 1997-07-14  | NULL   |
+|  2 |      |  NULL | 1999-08-04  | NULL   |
++----+------+-------+-------------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [sql25]> insert into student(id,name,dateofbirth,marks) values(3,null,'1997-07-14',78.45);
+ERROR 1048 (23000): Column 'name' cannot be null
+MariaDB [sql25]> insert into student(name,dateofbirth,marks) values('harry','1997-07-14',78.45);
+Query OK, 1 row affected, 1 warning (0.024 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  2 | ron   |  NULL | 1999-08-04  | NULL   |
+|  1 |       | 78.45 | 1997-07-14  | NULL   |
+|  2 |       |  NULL | 1999-08-04  | NULL   |
+|  0 | harry | 78.45 | 1997-07-14  | NULL   |
++----+-------+-------+-------------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [sql25]> insert into student(id,name,dateofbirth,marks) values(null,'harry','1997-07-14',78.45);
+ERROR 1048 (23000): Column 'id' cannot be null
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+Query OK, 1 row affected (0.027 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  2 | ron   |  NULL | 1999-08-04  | NULL   |
+|  1 |       | 78.45 | 1997-07-14  | NULL   |
+|  2 |       |  NULL | 1999-08-04  | NULL   |
+|  0 | harry | 78.45 | 1997-07-14  | NULL   |
+|  1 | harry | 45.00 | NULL        | NULL   |
++----+-------+-------+-------------+--------+
+5 rows in set (0.002 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.031 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) unique,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [sql25]> select * from student;
++------+-------+-------+-------------+--------+
+| id   | name  | marks | dateofbirth | course |
++------+-------+-------+-------------+--------+
+|    1 | harry | 45.00 | NULL        | NULL   |
++------+-------+-------+-------------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1062 (23000): Duplicate entry '1' for key 'id'
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | YES  | UNI | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.011 sec)
+
+MariaDB [sql25]> insert into student values(null,'harry',45,null,null);
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [sql25]> select * from student;
++------+-------+-------+-------------+--------+
+| id   | name  | marks | dateofbirth | course |
++------+-------+-------+-------------+--------+
+|    1 | harry | 45.00 | NULL        | NULL   |
+| NULL | harry | 45.00 | NULL        | NULL   |
++------+-------+-------+-------------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1062 (23000): Duplicate entry '1' for key 'id'
+MariaDB [sql25]> insert into student values(null,'harry',45,null,null);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [sql25]> select * from student;
++------+-------+-------+-------------+--------+
+| id   | name  | marks | dateofbirth | course |
++------+-------+-------+-------------+--------+
+|    1 | harry | 45.00 | NULL        | NULL   |
+| NULL | harry | 45.00 | NULL        | NULL   |
+| NULL | harry | 45.00 | NULL        | NULL   |
++------+-------+-------+-------------+--------+
+3 rows in set (0.003 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) not null unique,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.045 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1062 (23000): Duplicate entry '1' for key 'id'
+MariaDB [sql25]> insert into student values(null,'harry',45,null,null);
+ERROR 1048 (23000): Column 'id' cannot be null
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   | PRI | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | YES  |     | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.004 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) not null unique,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null unique,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.037 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1048 (23000): Column 'dateofbirth' cannot be null
+MariaDB [sql25]> insert into student values(1,'harry',45,'1990-09-09',null);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-09',null);
+ERROR 1062 (23000): Duplicate entry '1990-09-09' for key 'dateofbirth'
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-10',null);
+Query OK, 1 row affected (0.044 sec)
+
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   | PRI | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | NO   | UNI | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.008 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.078 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) primary key,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null unique,
+    -> course varchar(10)
+    -> );
+Query OK, 0 rows affected (0.042 sec)
+
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   | PRI | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | NO   | UNI | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.024 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1048 (23000): Column 'dateofbirth' cannot be null
+MariaDB [sql25]> insert into student values(1,'harry',45,null,null);
+ERROR 1048 (23000): Column 'dateofbirth' cannot be null
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-09',null);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-09',null);
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+MariaDB [sql25]> insert into student values(null,'harry',45,'1990-09-09',null);
+ERROR 1048 (23000): Column 'id' cannot be null
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) primary key,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date primary key,
+    -> course varchar(10)
+    -> );
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3),
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null,
+    -> course varchar(10),
+    -> primary key(id),
+    -> unique(dateofbirth)
+    -> );
+Query OK, 0 rows affected (0.039 sec)
+
+MariaDB [sql25]> desc student;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| id          | tinyint(3)   | NO   | PRI | NULL    |       |
+| name        | varchar(10)  | NO   |     | NULL    |       |
+| marks       | decimal(6,2) | YES  |     | NULL    |       |
+| dateofbirth | date         | NO   | UNI | NULL    |       |
+| course      | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.015 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.041 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3),
+    -> name varchar(10),
+    -> marks decimal(6,2),
+    -> dateofbirth date,
+    -> course varchar(10),
+    -> primary key(id),
+    -> unique(dateofbirth),
+    -> not null(name,dateofbirth)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'not null(name,dateofbirth)
+)' at line 10
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3),
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null,
+    -> course varchar(10),
+    -> primary key(id),
+    -> unique(dateofbirth)
+    -> );
+Query OK, 0 rows affected (0.037 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) primary key,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null unique,
+    -> course enum('java','python','php');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 7
+MariaDB [sql25]> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) primary key,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null unique,
+    -> course enum('java','python','php')
+    -> );
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [sql25]> desc student;
++-------------+-----------------------------+------+-----+---------+-------+
+| Field       | Type                        | Null | Key | Default | Extra |
++-------------+-----------------------------+------+-----+---------+-------+
+| id          | tinyint(3)                  | NO   | PRI | NULL    |       |
+| name        | varchar(10)                 | NO   |     | NULL    |       |
+| marks       | decimal(6,2)                | YES  |     | NULL    |       |
+| dateofbirth | date                        | NO   | UNI | NULL    |       |
+| course      | enum('java','python','php') | YES  |     | NULL    |       |
++-------------+-----------------------------+------+-----+---------+-------+
+5 rows in set (0.018 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,'1990-09-09','java');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
++----+-------+-------+-------------+--------+
+1 row in set (0.003 sec)
+
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-08','python');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
+|  2 | harry | 45.00 | 1990-09-08  | python |
++----+-------+-------+-------------+--------+
+2 rows in set (0.007 sec)
+
+MariaDB [sql25]> insert into student values(3,'harry',45,'1991-09-08','html');
+Query OK, 1 row affected, 1 warning (0.014 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
+|  2 | harry | 45.00 | 1990-09-08  | python |
+|  3 | harry | 45.00 | 1991-09-08  |        |
++----+-------+-------+-------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [sql25]> insert into student values(4,'ron',45,'1992-09-08','java,python');
+Query OK, 1 row affected, 1 warning (0.005 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
+|  2 | harry | 45.00 | 1990-09-08  | python |
+|  3 | harry | 45.00 | 1991-09-08  |        |
+|  4 | ron   | 45.00 | 1992-09-08  |        |
++----+-------+-------+-------------+--------+
+4 rows in set (0.010 sec)
+
+MariaDB [sql25]> drop table student;
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [sql25]> create table student
+    -> (
+    -> id tinyint(3) primary key,
+    -> name varchar(10) not null,
+    -> marks decimal(6,2),
+    -> dateofbirth date not null unique,
+    -> course set('java','python','php')
+    -> );
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [sql25]> desc student;
++-------------+----------------------------+------+-----+---------+-------+
+| Field       | Type                       | Null | Key | Default | Extra |
++-------------+----------------------------+------+-----+---------+-------+
+| id          | tinyint(3)                 | NO   | PRI | NULL    |       |
+| name        | varchar(10)                | NO   |     | NULL    |       |
+| marks       | decimal(6,2)               | YES  |     | NULL    |       |
+| dateofbirth | date                       | NO   | UNI | NULL    |       |
+| course      | set('java','python','php') | YES  |     | NULL    |       |
++-------------+----------------------------+------+-----+---------+-------+
+5 rows in set (0.011 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,'1990-09-09','java');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
++----+-------+-------+-------------+--------+
+1 row in set (0.018 sec)
+
+MariaDB [sql25]> insert into student values(2,'harry',45,'1990-09-08','python');
+Query OK, 1 row affected (0.048 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
+|  2 | harry | 45.00 | 1990-09-08  | python |
++----+-------+-------+-------------+--------+
+2 rows in set (0.002 sec)
+
+MariaDB [sql25]> insert into student values(1,'harry',45,'1990-09-09','java');
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [sql25]>
+MariaDB [sql25]> insert into student values(3,'harry',45,'1991-09-08','html');
+Query OK, 1 row affected, 1 warning (0.004 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+--------+
+| id | name  | marks | dateofbirth | course |
++----+-------+-------+-------------+--------+
+|  1 | harry | 45.00 | 1990-09-09  | java   |
+|  2 | harry | 45.00 | 1990-09-08  | python |
+|  3 | harry | 45.00 | 1991-09-08  |        |
++----+-------+-------+-------------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [sql25]> insert into student values(4,'ron',45,'1992-09-08','java,python');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+-------------+
+| id | name  | marks | dateofbirth | course      |
++----+-------+-------+-------------+-------------+
+|  1 | harry | 45.00 | 1990-09-09  | java        |
+|  2 | harry | 45.00 | 1990-09-08  | python      |
+|  3 | harry | 45.00 | 1991-09-08  |             |
+|  4 | ron   | 45.00 | 1992-09-08  | java,python |
++----+-------+-------+-------------+-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [sql25]> insert into student values(5,'ron',45,'1996-09-08','python,html');
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [sql25]> select * from student;
++----+-------+-------+-------------+-------------+
+| id | name  | marks | dateofbirth | course      |
++----+-------+-------+-------------+-------------+
+|  1 | harry | 45.00 | 1990-09-09  | java        |
+|  2 | harry | 45.00 | 1990-09-08  | python      |
+|  3 | harry | 45.00 | 1991-09-08  |             |
+|  4 | ron   | 45.00 | 1992-09-08  | java,python |
+|  5 | ron   | 45.00 | 1996-09-08  | python      |
++----+-------+-------+-------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [sql25]>
+
+
+
+
+
+
+
+
+
+

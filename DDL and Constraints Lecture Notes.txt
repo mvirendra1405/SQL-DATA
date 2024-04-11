@@ -1,0 +1,280 @@
+SQL ==> Structured Query Language
+
+Used to access the data and structures within RDBMS.
+
+It provides commands:
+-querying data
+-inserting, updating, deleting the data
+-creating, modifying and deleting database object (tables)
+-controlling the access to the database
+-database consistency
+
+SQL Statement types:
+DDL (data definition language) - creating, modifying and deleting database object (tables)
+create
+alter
+drop
+truncate
+
+DML(data manipulation language) - inserting, updating, deleting the data
+insert
+update
+delete
+
+DQL(data query language) - querying data
+select 
+show
+help
+
+DCL(data control language) - controlling the access to the database
+grant
+revoke
+
+TCL(transaction control language) - database consistency
+commit
+rollback
+savepoint
+
+(;) semi colon is used to indicate the end of the command.
+
+1. connect with the database 
+mysql -u root
+
+2. create the database (do this only once at the start of the project)
+different database for every new project, every database created will have its own database object
+
+create database sql25;
+
+show all the database (give a list of all the database created in the mysql server)
+
+show databases;
+
+3. select the database (out of all the database, we will be working in only one database, use this command everytime you login to the database server)
+
+use sql25;
+
+delete the database (caution: all the objects within the database will also be deleted)
+
+drop database sql25;
+
+4. create table in the database
+
+create table table_name
+(
+	columns
+)
+
+columns ==> column_name data_type
+
+data_type
+1. numeric
+	int ===> whole number
+	float(decimal) ===> fractional number
+
+	5656.45
+	8.34
+	12.34
+
+	float(6,2) ==> 4 bytes
+
+	decimal(6,2) ==> vary
+2. string(character)
+	char(4) ==> fixed 4 bytes
+	
+	varchar(4) ==> vary
+3. date
+	ISO standard
+	yyyy-mm-dd
+
+table_name ==> has to be unique in the database
+
+create table student
+(
+	id tinyint(3),
+	name varchar(10),
+	marks decimal(6,2),
+	dateofbirth date,
+	course varchar(10)
+);
+
+5. insert some values in the table
+using dml command insert
+
+insert into table_name values(values);
+
+insert into student values(1,'harry',89.54,'1997-08-09','java');
+
+6. confirm the values inserted into the table
+query the table
+using dql command select
+
+select columnnames from table_name;
+
+select * from student;
+
+* ===> display/select all the columns of the table student
+
+-----------------------------------------------------------------
+Get the information about the table and its columns
+
+describe table_name;
+OR
+desc table_name;
+
+describe student;
+
+Find all the tables in the selected database
+
+show tables;
+
+Delete the table from the database
+
+drop table table_name;
+
+drop table student;
+
+Delete the content of the table but not the actual table structure
+
+truncate table table_name;
+
+truncate table student;
+
+---------------------------------------------------------------------
+Constraints:
+Rules/Restriction we will apply on the columns, in order to specify what values the column can contain and what values are restricted in the column
+
+1. NOT NULL constraints (column cannot contain NULL values)
+
+insert into student(id,name,dateofbirth) values(2,'ron','1999-08-04');
+
+NULL is the value which indicate the missing data
+
+insert into student(id,dateofbirth,marks) values(1,'1997-07-14',78.45);
+
+insert into student(id,name,dateofbirth,marks) values(3,null,'1997-07-14',78.45);
+
+drop table student;
+
+create table student
+(
+	id tinyint(3) not null,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date,
+	course varchar(10)
+);
+
+insert into student(name,dateofbirth,marks) values('harry','1997-07-14',78.45);
+
+insert into student(id,name,dateofbirth,marks) values(null,'harry','1997-07-14',78.45);
+
+2. UNIQUE constraits (column cannot contain duplicate values)
+insert into student values(1,'harry',45,null,null);
+
+drop table student;
+
+create table student
+(
+	id tinyint(3) unique,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date,
+	course varchar(10)
+);
+
+insert into student values(null,'harry',45,null,null);
+
+unique constraint can have null values inserted in it.
+
+We can combine two constraint (unique + not null)
+
+create table student
+(
+	id tinyint(3) not null unique,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date not null unique,
+	course varchar(10)
+);
+
+3. PRIMARY KEY constraint (not null + unique) 
+
+There can be more than one columns with both the not null and unique constraint, but in a table there can be only one primary key. Primary key are mostly used to uniquely identify each record(row). They will be used as foreign key in some other table.
+
+create table student
+(
+	id tinyint(3) primary key,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date not null unique,
+	course varchar(10)
+);
+
+create table student
+(
+	id tinyint(3),
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date not null,
+	course varchar(10),
+	primary key(id),
+	unique(dateofbirth)
+);
+
+create table student
+(
+	id tinyint(3),
+	name varchar(10),
+	marks decimal(6,2),
+	dateofbirth date,
+	course varchar(10),
+	primary key(id),
+	unique(dateofbirth),
+	not null(name,dateofbirth) ====> not allowed
+);
+
+4. ENUM constraint (values to choose from, in order to add in the column)
+
+create table student
+(
+	id tinyint(3) primary key,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date not null unique,
+	course enum('java','python','php')
+);
+
+insert into student values(1,'harry',45,'1990-09-09','java');
+
+insert into student values(2,'harry',45,'1990-09-08','python');
+
+insert into student values(3,'harry',45,'1991-09-08','html');
+
+insert into student values(4,'ron',45,'1992-09-08','java,python');
+
+only one value from the list can be added in the column, if the value is not in the list, nothing is inserted and even if the combination of the value of the list is inserted, again nothing is inserted.
+
+5. SET constraint (values to choose from, in order to add in the column)
+
+create table student
+(
+	id tinyint(3) primary key,
+	name varchar(10) not null,
+	marks decimal(6,2),
+	dateofbirth date not null unique,
+	course set('java','python','php')
+);
+
+insert into student values(1,'harry',45,'1990-09-09','java');
+
+insert into student values(2,'harry',45,'1990-09-08','python');
+
+insert into student values(3,'harry',45,'1991-09-08','html');
+
+insert into student values(4,'ron',45,'1992-09-08','java,python');
+
+insert into student values(5,'ron',45,'1996-09-08','python,html');
+
+only one value from the list can be added in the column, if the value is not in the list, nothing is inserted and even if the combination of the value of the list is inserted, it will be inserted.
+
+
