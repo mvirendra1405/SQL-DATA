@@ -1,4 +1,5 @@
 select * from student;
+
 -- this is use for fetch the details
 select student.fname,student.contact from student;
 
