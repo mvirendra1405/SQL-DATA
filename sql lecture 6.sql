@@ -1,5 +1,6 @@
 show databases;
 use virendra;
+
 create table table1 (id int,name varchar(20));
 SET SQL_SAFE_UPDATES = 0;
 select * from table1;
@@ -12,6 +13,7 @@ value
 (5,'anuj');
 use virendra;
 show tables;
+
 create table table2 (id int,name varchar (20));
 insert into table2
 value

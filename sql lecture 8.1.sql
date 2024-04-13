@@ -1,6 +1,7 @@
 select curdate();
 select now();
 select sysdate();
+
 select last_day(curdate());
 select last_day('2023-02-14');
 select datediff('2024-02-14','2023-03-15');
