@@ -1,6 +1,7 @@
 use virendra;
 show tables;
 select * from student_data;
+desc student_data;
 select id,department,name,marks,
 case
 when marks>=35 and marks<=60 then 'third class'

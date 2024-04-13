@@ -18,11 +18,14 @@ select truncate(12.11111111,3);
  
  -- mode
  select mod(10,4);
+ 
  -- floor
  select floor(10/4);
+ 
  -- power
  select pow(2,2);
  select pow(10,2);
+ 
  -- sqrt
  select sqrt(10);
  select sqrt(9);

@@ -1,6 +1,5 @@
 show databases;
 use virendra;
-
 show tables;
 select * from employee;
 alter table employee drop age;

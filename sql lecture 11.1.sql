@@ -1,8 +1,11 @@
 use virendra;
 create table college(cid int,cname varchar(20),location varchar(20));
+desc college;
 create table studentc(sid int primary key,sname varchar(20),sage int,scity varchar(30),
 cid int,foreign key(cid) references college(cid));
+desc studentc;
 alter table college modify cid int primary key;
+desc college;
 insert into college values(1,'mit','pune'),
 (2,'ajit','mumbai'),(3,'ITT','Mumbai'),;
 insert into studentc values(1,'rohit','23','nashik',3),

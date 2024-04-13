@@ -93,6 +93,7 @@ INSERT INTO Attendance VALUES
     (4, 4, '2023-12-20', '09:30:00', '16:00:00'),
     (5, 5, '2022-08-10', '08:45:00', '17:15:00');
 select * from attendance;
+
 -- sql Query
 -- 1.Query to retrieve employee information along with their department details.
 SELECT Employees.Emp_id, Employees.Emp_name, Employees.position, Department.DepartmentName

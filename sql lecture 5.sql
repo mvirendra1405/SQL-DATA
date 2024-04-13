@@ -18,3 +18,4 @@ select * from student_data where name like '%d__';
 select * from student_data where name like 'v______a';
 select * from student_data where name like 'v%a';
 insert into student_data values(14,'asif','mathhhhhhhhhhh',70,35000,65);
+insert into student_data values(15,'hannan','physicsssssss',80,45000,55);

@@ -11,5 +11,6 @@ create table order12(oid int primary key,product_name varchar(20),uid int,foreig
 
 alter table user;
 select * from order12;
+
 -- modify uid int primary key;
 insert into order12 values(1,'milk',1),(2,'bread',2),(3,'butter',4),(4,'ghee',4),(5,'chaas',5);

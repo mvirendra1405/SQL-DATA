@@ -2,10 +2,13 @@ use virendra;
 select * from studentc;
 select * from college;
 
+-- left join
 select * from college left join studentc on studentc.cid=college.cid;
 
+-- right join
 select * from college right join studentc on studentc.cid=college.cid;
 
+-- union join
 select * from college left join studentc on studentc.cid=college.cid
 union
 select * from college right join studentc on studentc.cid=college.cid;
@@ -16,6 +19,7 @@ insert into employeec values(1,'virendra','CEO',0),(2,'anuj','HR',1),(3,'rohit',
 select * from employeec;
 truncate employeec;
 
+-- inner join
 select e.ename as employee_name,e.designation,m.ename as Manager_name,m.designation
 from employeec as e inner join employeec as m on m.eid=e.mid;
 
