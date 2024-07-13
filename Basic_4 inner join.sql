@@ -22,4 +22,9 @@ insert into student14 values(11,'Devansh',06,'ghatkopar'),
 (19,'shivam',26,'mummbra');
 desc student14;
 select * from student14;
-select library.lid,student14.sid,library.book_name,student14.Student_name from library inner join student14 on student14.sid=library.sid;
+select library.lid,student14.sid,library.book_name,student14.Student_name from library inner join student14
+on student14.sid=library.sid;
+select library.lid,student14.sid,library.book_name,student14.Student_name from library left join student14
+on student14.sid=library.sid;
+select library.lid,student14.sid,library.book_name,student14.Student_name from library right join student14
+on student14.sid=library.sid;
