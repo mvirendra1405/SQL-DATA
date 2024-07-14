@@ -20,6 +20,7 @@ insert into student14 values(11,'Devansh',06,'ghatkopar'),
 (17,'shubham',24,'kalwa'),
 (18,'dheeraj',24,'kalwa'),
 (19,'shivam',26,'mummbra');
+insert into student14 values(20,'rajesh',32,'ambarnath');
 desc student14;
 select * from student14;
 select library.lid,student14.sid,library.book_name,student14.Student_name from library inner join student14
